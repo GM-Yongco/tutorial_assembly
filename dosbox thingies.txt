@@ -1,0 +1,29 @@
+==================================================
+MAIN
+=================================================
+
+
+mounting and unmounting
+	MOUNT 
+	MOUNT <virtual drive letter> <directory you want to mount on letter>
+	MLOUNT -U <the drive you want to unmount in dosbox>
+
+	note: 
+		dosbox has max 8 characters for directory names
+		"MOUNT" view mounted directories
+		D:\git\00_TextNotes\year3_sem1\archi
+
+to compile
+	A86.COM <name of file to compile>
+
+In x86 assembly, only certain registers can be used as index registers
+	SI (Source Index) and DI (Destination Index) are commonly used as index registers.
+	BX and BP can also serve as base registers in memory addressing.
+	AX, CX, DX, and SP cannot be used as index registers in most addressing modes.
+ex code
+	MOV AL, 'a'
+	mov ds, 0b800h
+	mov cl, 0
+	mov b[ds:cl], AL
+	~          ^
+	#ERROR 39: Bad Index Register
