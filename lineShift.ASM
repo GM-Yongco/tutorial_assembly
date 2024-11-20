@@ -2,14 +2,6 @@ MOV DS, 0b800h			; Set DS to the video memory segment
 
 JMP main
 
-delay:
-	MOV DI, 0			; initialize
-delayLoop:
-	INC DI				; increment
-	CMP DI,	32767		; condition
-	JL delayLoop 		; loop
-	ret
-
 shiftLine:
 	shiftCharactersInitialize:
 		MOV DI, 0				; initialize (first index of line) 	
@@ -24,10 +16,6 @@ shiftLine:
 		ADD DI, 2				; increment
 		CMP DI, 160				; condition
 		JL shiftCharactersLoop	; loop
-	callDelay:
-		PUSH DI					; temporaroly use DI for delay
-		call delay
-		POP DI
 	ret
 
 main:

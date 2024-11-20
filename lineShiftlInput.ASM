@@ -3,14 +3,6 @@ MOV DI, 0				; destination index
 
 JMP main
 
-delay:
-	MOV DI, 0			; initialize
-delayLoop:
-	INC DI				; increment
-	CMP DI,	32767		; condition
-	JL delayLoop 		; loop
-	ret
-
 shiftLine:						; uses AX as start location and BX as end locations
 	shiftCharactersInitialize:
 		MOV DI, AX				; initialize (first index of line) 	
@@ -25,10 +17,6 @@ shiftLine:						; uses AX as start location and BX as end locations
 		ADD DI, 2				; increment
 		CMP DI, BX				; condition
 		JL shiftCharactersLoop	; loop
-	callDelay:
-		PUSH DI					; temporaroly use DI for delay
-		call delay
-		POP DI
 	ret
 
 main:
