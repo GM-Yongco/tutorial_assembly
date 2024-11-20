@@ -82,9 +82,21 @@ scrollAll:
 		INC DI					; increment
 		CMP DI, 80				; condition
 		JL scrollAllLoop		; loop
+	ret
 
+scrollAgain:
+	scrollAgainInitialize:
+		MOV DI, 0				; counts and dtermines lines to be shifted
+	scrollAgainLoop:
+		PUSH DI
+		CALL scrollAll
+		POP DI
+	scrollAgainCondition:
+		INC DI					; increment
+		CMP DI, 80				; condition
+		JL scrollAgainLoop		; loop
 	ret
 
 main:
-	call scrollAll
+	call scrollAgain
 	INT 020
