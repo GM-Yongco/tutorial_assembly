@@ -54,7 +54,7 @@ shiftAll:
 			POP DI
 	shiftAllContiion:
 		INC DI					; increment
-		CMP DI, 24				; condition
+		CMP DI, 25				; condition
 		JL shiftAllLoop			; loop
 	ret
 
