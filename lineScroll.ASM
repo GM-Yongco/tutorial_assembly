@@ -1,4 +1,5 @@
 MOV DS, 0b800h			; Set DS to the video memory segment
+MOV DI, 0				; destination index
 
 JMP main
 
@@ -26,13 +27,25 @@ shiftLine:
 		JL shiftCharactersLoop	; loop
 	callDelay:
 		PUSH DI					; temporaroly use DI for delay
-		call delay
+		CALL delay
 		POP DI
+	ret
+
+scrollLine:
+	shiftLineInitialize:
+		MOV DI, 0				; initialize
+	shiftLineLoop:
+		PUSH DI
+		CALL shiftLine
+		POP DI
+	shiftLineCondition:
+		ADD DI, 1				; increment
+		CMP DI, 80				; condition
+		JL shiftLineLoop		; loop
 	ret
 
 main:
 
-MOV b[DS: 162], 'Q'				; my kind of print for debugging
-call shiftLine
+call scrollLine
 
 INT 020

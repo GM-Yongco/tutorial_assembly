@@ -1,4 +1,5 @@
 MOV DS, 0b800h			; Set DS to the video memory segment
+MOV DI, 0				; destination index
 
 JMP main
 
@@ -12,7 +13,7 @@ delayLoop:
 
 shiftLine:
 	shiftCharactersInitialize:
-		MOV DI, 0				; initialize (first index of line) 	
+		MOV DI, AX				; initialize (first index of line) 	
 		ADD DI, 158
 		MOV AH, b[DS: DI]		; get value of last index
 		SUB DI, 158
@@ -22,7 +23,7 @@ shiftLine:
 		MOV AH, AL				; put AL in AH
 	shiftCharactersCondition:
 		ADD DI, 2				; increment
-		CMP DI, 160				; condition
+		CMP DI, BX				; condition
 		JL shiftCharactersLoop	; loop
 	callDelay:
 		PUSH DI					; temporaroly use DI for delay
@@ -32,7 +33,9 @@ shiftLine:
 
 main:
 
-MOV b[DS: 162], 'Q'				; my kind of print for debugging
+MOV AX, 160			; start location of the shift
+MOV BX, AX
+ADD BX, 160			; end location of the shift
 call shiftLine
 
 INT 020
