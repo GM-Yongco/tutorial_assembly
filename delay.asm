@@ -7,18 +7,18 @@ delay:
 	MOV SI, 0			; index for slow delay
 delayLoop:
 	INC SI				; increment
-	CMP SI, 32767		; jump if SI
+	CMP SI, 32767		; loop if SI is less than
 	JL delayLoop 
 	ret
 
 main:
-	MOV DI, 0			; Set SI to Display Index
+	MOV DI, 0			; Set DI to Display Index
 print:
 	MOV b[DS: DI], AL	; print
 	call delay			; delay
 	
 	ADD DI, 2			; increment
-	CMP DI, 160			; condition (jump if DI less 160)
+	CMP DI, 160			; condition (loop if DI less 160)
 	JL print			; repeat
 
 INT 020
