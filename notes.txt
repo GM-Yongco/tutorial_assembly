@@ -2,7 +2,6 @@
 MAIN
 =================================================
 
-
 mounting and unmounting
 	MOUNT 
 	MOUNT <virtual drive letter> <directory you want to mount on letter>
@@ -11,23 +10,66 @@ mounting and unmounting
 	note: 
 		dosbox has max 8 characters for directory names
 		"MOUNT" view mounted directories
-		D:\git\00_TextNotes\year3_sem1\archi
 
 to compile
 	A86.COM <name of file to compile>
 
+=================================================
+REGISTERS
+=================================================
+
+general purpose registers
+	AX, BX, CX, DX
+	each has 16 bits of memory
+	each can be divided to bytes(8 bit segments)
+		the H and L byte
+			H for the high byte (first 8 bytes)
+			L for the low byte (second/last 8 bytes)
+
+DS (Data Segment)
+SI (Source Index)
+DI (Destination Index)
+	all these registers are words(has size of 16bits)
+	DS stores the location of specific memory segments
+	SI and DI stores the offset of the memory locations
+
+DS special adresses
+	0B800H for text mode video memory
+	0bF000 - 0bFFFF for BIOS ROM
+	0x0000 - 0xFFFF for hardware devices
+	etc.
+	note, I only tested the text mode video memory
+
+
+
+=================================================
+
 In x86 assembly, only certain registers can be used as index registers
-	SI (Source Index) and DI (Destination Index) are commonly used as index registers.
-	BX and BP can also serve as base registers in memory addressing.
-	AX, CX, DX, and SP cannot be used as index registers in most addressing modes.
+	SI (Source Index) and DI (Destination Index) are commonly used as index registers
+	AX, BX, CX, DX, and SP cannot be used as index registers in most addressing modes
+	addresses can also have different sized inputs
 ex code
 	MOV AL, 'a'
-	mov ds, 0b800h
-	mov cl, 0
-	mov b[ds:cl], AL
+	mov DS, 0b800h
+	mov CX, 0
+	mov b[DS:CX], AL
 	~          ^
 	#ERROR 39: Bad Index Register
-	
+ex code 2
+	MOV AX, 'A'
+	mov DS, 0b800h
+	mov SI, 0
+	mov b[DS:SI], AX
+	~               ^
+	#ERROR 13: Byte/Word Combination Not Allowed 
+ex code (this one works :DDD)(also works if you use AL)
+	MOV AH, 'A'
+	mov DS, 0b800h
+	mov SI, 0
+	mov b[DS:SI], AH
+
+	INT 020
+
 	
 =================================================
 COMMANDS
@@ -58,6 +100,9 @@ DEBUGGER
 	
 debugger <your com file>
 -t prints the values of the registers line by line
+
+doesnt work for me for some reason
+i have to ask sir about it pa
 	
 
 
