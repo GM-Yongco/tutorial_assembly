@@ -10,17 +10,15 @@ delayLoop:
 	ret
 
 multiply:						; AX and BX as inputs, CX as output
-	PUSH DX						; doesnt overwrite on DX if ever theres data there
 	multiplyInitialize:
-		MOV DX, 0				; how many times we have added BX to CX
+		MOV DI, 0				; how many times we have added BX to CX
 		MOV CX, 0				; make sure CX is empty
 	multiplyLoop:
 		ADD CX, BX
 	multiplyCondition:
-		INC DX					; increment
-		CMP DX, AX				; condition
+		INC DI					; increment
+		CMP DI, AX				; condition
 		JL multiplyLoop			; loop
-	POP DX
 	ret
 
 main:
@@ -29,7 +27,9 @@ main:
 
 	MOV AX, 2
 	MOV BX, 160
+	PUSH DI
 	call multiply
+	POP DI
 
 	PUSH BX
 	POP AX
