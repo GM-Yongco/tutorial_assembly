@@ -11,7 +11,7 @@ delayLoop:
 	JL delayLoop 		; loop
 	ret
 
-shiftLine:
+shiftLine:						; uses AX as start location and BX as end locations
 	shiftCharactersInitialize:
 		MOV DI, AX				; initialize (first index of line) 	
 		ADD DI, 158
