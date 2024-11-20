@@ -1,5 +1,4 @@
 MOV DS, 0b800h			; Set DS to the video memory segment
-MOV DI, 0				; destination index
 
 JMP main
 
@@ -23,12 +22,15 @@ multiply:						; AX and BX as inputs, CX as output
 	multiplyInitialize:
 		MOV DI, 0				; how many times we have added BX to CX
 		MOV CX, 0				; make sure CX is empty
+	multiplyCondition:
+		CMP DI, AX				; condition
+		JGE multiplyEnd			; exit
 	multiplyLoop:
 		ADD CX, BX
-	multiplyCondition:
+	multiplyUpdate:
 		INC DI					; increment
-		CMP DI, AX				; condition
-		JL multiplyLoop			; loop
+		JMP multiplyCondition
+	multiplyEnd:
 	ret
 
 shiftAll:
@@ -56,7 +58,5 @@ shiftAll:
 	ret
 
 main:
-
-call shiftAll
-
-INT 020
+	call shiftAll
+	INT 020

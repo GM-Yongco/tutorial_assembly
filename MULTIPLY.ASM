@@ -13,12 +13,15 @@ multiply:						; AX and BX as inputs, CX as output
 	multiplyInitialize:
 		MOV DI, 0				; how many times we have added BX to CX
 		MOV CX, 0				; make sure CX is empty
+	multiplyCondition:
+		CMP DI, AX				; condition
+		JGE multiplyEnd			; exit
 	multiplyLoop:
 		ADD CX, BX
-	multiplyCondition:
+	multiplyUpdate:
 		INC DI					; increment
-		CMP DI, AX				; condition
-		JL multiplyLoop			; loop
+		JMP multiplyCondition
+	multiplyEnd:
 	ret
 
 main:
