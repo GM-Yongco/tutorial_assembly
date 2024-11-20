@@ -27,3 +27,37 @@ ex code
 	mov b[ds:cl], AL
 	~          ^
 	#ERROR 39: Bad Index Register
+	
+	
+=================================================
+COMMANDS
+=================================================
+
+compare(CMP)
+	subtracts second operand from first
+	sets flags depending on the result of the subtraction
+		ZF	zero flag
+		SF	sign flag
+		CF	carry flag
+		OF	overflow flag
+	note from experience: 
+		uses signed ints and 0ffffh is considered negative
+		32767 is the biggest 16 bit positive signed int
+
+Jump commands
+	JMP	unconditional jumps
+conditional jumps (uses the flags set by the last CMP done)
+	JG	jump if greater
+	JGE 	jump if greater/equal
+	JL	jump if lesser
+	JLE	jump if lesser.equal
+	
+=================================================
+DEBUGGER
+=================================================
+	
+debugger <your com file>
+-t prints the values of the registers line by line
+	
+
+

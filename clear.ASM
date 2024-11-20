@@ -5,7 +5,7 @@ mov SI, 0                    ; initialize SI to 0
 loop_start:
     mov [DS:SI], AL          ; Write nonbreaking space to video memory
     add SI, 2                ; Increment SI (move to next character position)
-    cmp SI, 4800            ; Compare SI with 4000 (screen size in terms of bytes)
+    cmp SI, 4000	     ; Compare SI with 4000 (screen size in terms of bytes)
     jg end_loop              ; Jump to end if SI > 4000
     jmp loop_start           ; Jump back to loop_start if SI <= 4000
 

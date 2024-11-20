@@ -5,3 +5,7 @@ TEMP.*
 *.COM
 *.sym
 *.SYM
+*.err
+*.ERR
+*.und
+*.UND
