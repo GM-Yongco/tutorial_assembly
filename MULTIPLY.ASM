@@ -25,8 +25,8 @@ main:
 	PUSH AX
 	PUSH BX
 
-	MOV AX, 2
-	MOV BX, 160
+	MOV AX, 3
+	MOV BX, 80
 	PUSH DI
 	call multiply
 	POP DI
