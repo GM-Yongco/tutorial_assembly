@@ -40,7 +40,14 @@ DS special adresses
 	etc.
 	note, I only tested the text mode video memory
 
-
+text mode video memory
+	DOS BOX has a width and height of 80x25 characters
+	0B800H accesses this 
+	with b[DS:SI] you can access each character like an array
+	every odd index of SI is reserved for character formatting 
+		like color and background colour
+	every even index is character information (what character should be there)
+	for every b[DS:SI] their respective character format is in b[DS:SI + 1]
 
 =================================================
 
@@ -89,11 +96,18 @@ compare(CMP)
 Jump commands
 	JMP	unconditional jumps
 conditional jumps (uses the flags set by the last CMP done)
-	JG	jump if greater
+	JG		jump if greater
 	JGE 	jump if greater/equal
-	JL	jump if lesser
-	JLE	jump if lesser.equal
-	
+	JL		jump if lesser
+	JLE		jump if lesser.equal
+
+=================================================
+INTERRUPTS
+=================================================
+
+INT 020
+this one tells the computer the program is done
+
 =================================================
 DEBUGGER
 =================================================
