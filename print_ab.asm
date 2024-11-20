@@ -1,9 +1,10 @@
-MOV AL, 'A'
-mov ds, 0b800h; Set DS to the video memory segment
+mov ds, 0b800h      ; Set DS to the video memory segment
+
+MOV AH, 'A'
 mov si, 0
-mov b[ds:si], AL; using byte offsets, in the video memory segmet, offset of value si by label/offset of byte then put al in there
+mov b[ds:si], AH    ; using byte offsets, in the video memory segmet, offset of vAHue si by label/offset of byte then put AH in there
 add si, 2
-inc AL
-mov b[ds: si], AL
+inc AH
+mov b[ds: si], AH
 
 INT 020
