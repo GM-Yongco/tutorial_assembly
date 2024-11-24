@@ -1,0 +1,6 @@
+MOV DS, 0B00H
+MOV DI, 0
+
+MOV AH, 'K'
+
+MOV [DS:DI]
