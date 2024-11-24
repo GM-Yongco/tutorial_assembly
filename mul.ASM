@@ -15,7 +15,8 @@ multiply:		; takes AX*BX = AX; and remainder as DX
 	MOV BX, 4
 	MUL BX	
 
-print:		; takes DI as input on how many times to print
+; note, the number of printed "A" is half the result of division
+print:		; takes AX as input on how many times to print
 	MOV DI, 0
 	print_condition:
 		CMP DI, AX			; exit condition (loop if DI less AX)
