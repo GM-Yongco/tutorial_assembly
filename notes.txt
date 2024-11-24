@@ -101,6 +101,16 @@ conditional jumps (uses the flags set by the last CMP done)
 	JL		jump if lesser
 	JLE		jump if lesser.equal
 
+DIV (unsigned divide)
+MUL (unsigned multiply)
+	both take AX and function argument was variables
+	AX / DIV <divisor>
+	AX * MUL <multiple>
+	both outputs gets stored at AX after
+	the remainder of DIV is placed in DX
+		note: DX needs to be set to 0 before this or there'll be an error
+
+
 =================================================
 INTERRUPTS
 =================================================
