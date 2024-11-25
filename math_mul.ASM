@@ -1,13 +1,6 @@
 MOV DS, 0b800h			; Set DS to the video memory segment
 JMP main
 
-delay:
-	MOV DX, 0FFFFh	; index for slow delay
-delayLoop:
-	DEC DX				; increment
-	JNZ delayLoop 
-	ret
-
 main:
 
 multiply:		; takes AX*BX = AX; and remainder as DX
@@ -23,7 +16,6 @@ print:		; takes AX as input on how many times to print
 		JGE print_end
 	print_body:
 		MOV b[DS: DI], 'A'	; print
-		call delay			; delay
 	print_increment:
 		ADD DI, 2			; increment
 		jmp print_condition	; loop

@@ -24,7 +24,7 @@ print:		; takes AX as input on how many times to print
 		JGE print_end
 	print_body:
 		MOV b[DS: DI], 'A'	; print
-		call delay			; delay
+		call delay
 	print_increment:
 		ADD DI, 2			; increment
 		jmp print_condition	; loop
