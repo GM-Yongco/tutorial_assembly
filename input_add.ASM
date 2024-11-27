@@ -1,22 +1,22 @@
 MOV DS, 0b800h			; Set DS to the video memory segment
 JMP main
 
-input_as_int_1:				; output stored at AX as int
+input_as_int:				; output stored at AX as int
 	; initialize
 		MOV AX, 0			; stored char input
 		MOV BX, 10			; because base 10
 		MOV CX, 0			; as temp variable
 		MOV DI, 0			; how many inputs so far
-	IAI_1_condition:
+	IAI_condition:
 		CMP DI, 4			; limit input to 4 digits, 16 bit int limit
-		JGE IAI_1_end
+		JGE IAI_end
 	; body
 		; input
 			INT 16h
 			MOV AH, 0			; removes formatting
 		; early exit if return/enter key
 			CMP AX, 13
-			JE IAI_1_end
+			JE IAI_end
 		; multiply stored input so far by 10
 			PUSH AX
 			MOV AX, CX
@@ -29,16 +29,18 @@ input_as_int_1:				; output stored at AX as int
 			ADD CX, AX
 	; update
 		INC DI
-		JMP IAI_1_condition
-	IAI_1_end:
+		JMP IAI_condition
+	IAI_end:
 		MOV AX, CX
-		ret
+		RET
 
 main:
 
-MOV AX, 0				; the two numbers to add
-call input_as_int_1
-
+call input_as_int
+PUSH AX
+call input_as_int
+POP BX
+ADD AX, BX
 
 int_to_string:
 	; initialize 
