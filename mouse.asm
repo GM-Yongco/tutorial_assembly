@@ -8,6 +8,8 @@
 	MOV DS, AX			; Set DS to the video memory segment
 	mov AX, 0			; initialize mouse
 	int 33h
+	mov AX, 1			; show mouse
+	int 33h
 loop_condition:
 	CMP BX, 2			; if right click
 	JE loop_end
@@ -18,6 +20,8 @@ loop_condition:
 
 	MOV AX, 320			; calculating x, y coordinates
 	MUL DX
+
+	SHR CX, 1			; shift right once(divide by 2) dont even know why i have to fix this bug like this but cest la vie
 	ADD AX, CX
 	MOV DI, AX			; puts the coordinates to a valid register
 
