@@ -12,6 +12,7 @@ input_as_int:				; output stored at AX as int
 		JGE IAI_end
 	; body
 		; input
+			MOV AX, 0			; AX needs to be 0 for 16h
 			INT 16h
 			MOV AH, 0			; removes formatting
 		; early exit if return/enter key
