@@ -100,6 +100,8 @@ conditional jumps (uses the flags set by the last CMP done)
 	JGE 	jump if greater/equal
 	JL		jump if lesser
 	JLE		jump if lesser.equal
+	JZ		jump if zero
+	JNZ		jump if not zero
 
 DIV (unsigned divide)
 MUL (unsigned multiply)
@@ -111,12 +113,29 @@ MUL (unsigned multiply)
 		note: DX needs to be set to 0 before this or there'll be an error
 
 
+
+
 =================================================
-INTERRUPTS
+INTERRUPTS (solo INT)
 =================================================
 
-INT 020
 this one tells the computer the program is done
+	INT 020
+
+takes character input and stores it in the AX register
+	INT 16h
+
+
+Set graphics mode 13h (320x200 pixels, 256 colors)
+	mov ah, 00h
+	mov al, 13h
+	int 10h
+
+Set video mode to 80x25 text mode
+	mov ah, 00h
+	mov al, 03h
+	int 10h
+
 
 =================================================
 DEBUGGER
