@@ -18,6 +18,10 @@ loop_condition:
 		MOV AX, 0			; AX needs to be 0 for 16h
 		INT 16h
 		MOV AH, 0			; removes formatting
+	; early exit if return/enter key
+		CMP AX, 13
+		JE loop_end
+	; ascii formatting
 		SUB AL, '0'			; ascii to int
 		PUSH AX
 	; mouse coords
